@@ -1,0 +1,6 @@
+---
+- src: ssh://git@github.com/GulfCoastGreens/inventory.git
+  version: master
+  scm: git
+  name: inventory
+

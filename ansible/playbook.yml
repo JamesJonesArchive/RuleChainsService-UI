@@ -1,0 +1,12 @@
+---
+- hosts: "{{ target_hosts }}"
+  vars_files:
+    - ./vars/main.yml
+    - ./vars/vault.yml
+  vars:
+    package_settings: "{{ skip_var | default(lookup('file','../package.json') | from_json) }}"
+  tasks:
+    - name: Build RuleChainsUI
+      include_tasks: build.yml
+      tags:
+        - build
