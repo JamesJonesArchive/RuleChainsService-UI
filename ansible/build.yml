@@ -1,12 +1,13 @@
 ---
 - name: Ensure the fpm gem installed
   command: gem install fpm
-- name: remove node_modules
+- name: remove node_modules and dist folders
   file:
-    path: ../node_modules
-    state: "{{ item }}"
+    path: "{{ item }}"
+    state: absent
   with_items:
-    - absent
+    - ../node_modules
+    - ../dist
 - name: Build RuleChainsUI
   shell: "{{ item }}"
   with_items:
