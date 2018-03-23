@@ -15,3 +15,8 @@
       when: "deploy_env == 'Development'"
       tags:
         - publish
+    - name: Deploy RuleChainsUI to Docker
+      include_tasks: docker.yml
+      tags:
+        - docker
+        
