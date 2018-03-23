@@ -27,7 +27,7 @@
 - name: virtualenv activate
   shell: "source {{ playbook_dir }}/libs/bin/activate"
 - name: build docker
-  shell: "{{ playbook_dir }}/libs/bin/ansible-container build --debug"
+  shell: "{{ playbook_dir }}/libs/bin/ansible-container --debug build"
   args:
     chdir: "{{ playbook_dir }}/docker"
 
