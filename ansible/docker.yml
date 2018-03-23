@@ -1,18 +1,18 @@
 ---
-- name: pull image
-  docker_image:
-    name: ubuntu
-    state: present
-- name: create docker container
-  docker_container:
-    name: RuleChains
-    image: ubuntu
-    state: started
-    recreate: yes
-    exposed_ports:
-      - 80
-    ports:
-      - "80:9080"
+#- name: pull image
+#  docker_image:
+#    name: ubuntu
+#    state: present
+#- name: create docker container
+#  docker_container:
+#    name: RuleChains
+#    image: ubuntu
+#    state: started
+#    recreate: yes
+#    exposed_ports:
+#      - 80
+#    ports:
+#      - "80:9080"
 - name: Ensure the fpm gem installed
   command: gem install fpm
 - name: Install (virtualenv) within a user home directory.
