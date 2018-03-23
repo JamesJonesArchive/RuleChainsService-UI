@@ -10,3 +10,8 @@
       include_tasks: build.yml
       tags:
         - build
+    - name: Publish RuleChainsUI
+      include_tasks: publish.yml
+      when: "deploy_env == 'Development'"
+      tags:
+        - publish

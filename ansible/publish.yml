@@ -1,14 +1,14 @@
 ---
-- name: Find the RuleChains Service RPM that was produced
+- name: Find the RuleChainsUI RPM that was produced
   find: 
-    paths: "../build/libs/" 
-    patterns: "RuleChains*.rpm"
+    paths: "../" 
+    patterns: "{{ app_name }}*.rpm"
   register: rpmfind
 - name: Deploy to Bintray
-  shell: "curl -T {{ workspace }}/build/libs/{{ item.path | basename }} -ujamjon3:{{ bintray_api_key }} https://api.bintray.com/content/jamjon3/rpm/RuleChainsService/{{ app_version | quote }}/{{ item.path | basename }}"
+  shell: "curl -T {{ workspace }}/{{ item.path | basename }} -ujamjon3:{{ bintray_api_key }} https://api.bintray.com/content/jamjon3/rpm/RuleChainsService-UI/{{ app_version | quote }}/{{ item.path | basename }}"
   with_items: "{{ rpmfind.files|default([]) }}"
   args:
     chdir: "../"
 - name: Publish the version
-  shell: "curl -X POST -ujamjon3:{{ bintray_api_key }} https://api.bintray.com/content/jamjon3/rpm/RuleChainsService/{{ app_version | quote }}/publish"
+  shell: "curl -X POST -ujamjon3:{{ bintray_api_key }} https://api.bintray.com/content/jamjon3/rpm/RuleChainsService-UI/{{ app_version | quote }}/publish"
 
