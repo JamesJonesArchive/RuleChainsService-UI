@@ -5,8 +5,6 @@
     - ./vars/vault.yml
   vars:
     package_settings: "{{ skip_var | default(lookup('file','../package.json') | from_json) }}"
-  roles:
-    - { role: 'nginx', tags: ["deploy"] }
   tasks:
     - name: Build RuleChainsUI
       include_tasks: build.yml
