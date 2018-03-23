@@ -8,3 +8,8 @@
     name: RuleChains
     image: ubuntu
     state: started
+    recreate: yes
+    exposed_ports:
+      - 80
+    ports:
+      - "80:80"
