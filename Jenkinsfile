@@ -15,7 +15,7 @@ node('master') {
   }
   stage('Deploy RuleChainsUI') {
     sshagent (credentials: ['jenkins_ymd_key']) {
-      sh('#!/bin/sh -e\n' + "/bin/python2.7 ansible-playbook -i ansible/roles/inventory/${env.DEPLOY_ENV.toLowerCase()}/hosts --user=jenkins --vault-password-file=${env.DEPLOY_KEY} ansible/playbook.yml --extra-vars 'target_hosts=${env.DEPLOY_HOST} java_home=${env.JAVA_HOME} deploy_env=${env.DEPLOY_ENV} package_revision=${env.BUILD_NUMBER}' -b -t deploy")
+      sh('#!/bin/sh -e\n' + "ansible-playbook -e "ansible_python_interpreter=/usr/bin/python2" -i ansible/roles/inventory/${env.DEPLOY_ENV.toLowerCase()}/hosts --user=jenkins --vault-password-file=${env.DEPLOY_KEY} ansible/playbook.yml --extra-vars 'target_hosts=${env.DEPLOY_HOST} java_home=${env.JAVA_HOME} deploy_env=${env.DEPLOY_ENV} package_revision=${env.BUILD_NUMBER}' -b -t deploy")
     }
   }
 }
