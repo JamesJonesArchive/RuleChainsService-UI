@@ -11,8 +11,7 @@
   shell: "{{ item }}"
   with_items:
     - "npm install"
-#    - "node_modules/bower/bin/bower install"
-#    - "node_modules/grunt-cli/bin/grunt dist"
+    - "node_modules/@angular/cli/bin/ng build -prod"
   args:
       chdir: "../"
 
