@@ -24,4 +24,10 @@
     requirements: requirements.txt
     virtualenv: "{{ playbook_dir }}/libs"
     chdir: ../
+- name: virtualenv activate
+  shell: "source {{ playbook_dir }}/libs/bin/activate"
+- name: build docker
+  shell: "../libs/bin/ansible-composer build --debug"
+  args:
+    chdir: "{{ playbook_dir }}/docker"
 

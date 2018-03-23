@@ -1,1 +1,2 @@
-ansible-container[docker,k8s]
+ansible-container[docker,k8s,openshift]
+docker
