@@ -1,6 +1,6 @@
 node('master') {
   env.NODEJS_HOME = tool 'nodejs'
-  env.PATH = "${env.JENKINS_HOME}/bin:${env.NODEJS_HOME}/bin:${env.PATH}"
+  env.PATH = "${env.JENKINS_HOME}/bin:${env.JENKINS_HOME}/.local/bin:${env.NODEJS_HOME}/bin:${env.PATH}"
   checkout scm
 
   stage('Get Ansible Roles') {
