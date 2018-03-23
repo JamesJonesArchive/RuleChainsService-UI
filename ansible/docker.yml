@@ -13,3 +13,15 @@
       - 80
     ports:
       - "80:9080"
+- name: Ensure the fpm gem installed
+  command: gem install fpm
+- name: Install (virtualenv) within a user home directory.
+  pip:
+    name: virtualenv
+    extra_args: --user
+- name: Setup the requirements for container
+  pip:
+    requirements: requirements.txt
+    virtualenv: "{{ playbook_dir }}/libs"
+    chdir: ../
+

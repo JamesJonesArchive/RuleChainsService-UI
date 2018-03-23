@@ -5,6 +5,7 @@ node('master') {
 
   stage('Get Ansible Roles') {
     sh('#!/bin/sh -e\n' + 'rm -rf ansible/roles')
+    sh('#!/bin/sh -e\n' + 'rm -rf ansible/libs')
     sh('#!/bin/sh -e\n' + 'ansible-galaxy install -r ansible/requirements.yml -p ansible/roles/ -f')
   }
   stage('Build RuleChainsUI') {
