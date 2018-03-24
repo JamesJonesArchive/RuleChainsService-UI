@@ -5,7 +5,7 @@ settings:
     # The Conductor container does the heavy lifting, and provides a portable
     # Python runtime for building your target containers. It should be derived
     # from the same distribution as you're building your target containers with.
-    base: fedora:27
+    base: fedora:26
     # roles_path:   # Specify a local path containing Ansible roles
     # volumes:      # Provide a list of volumes to mount
     # environment:  # List or mapping of environment variables
@@ -53,7 +53,7 @@ services:
   # You may need to run `docker pull ubuntu:trusty` for this to work.
 
    rulechains-ui:
-     from: "fedora:27"
+     from: "fedora:26"
      ports:
        - "80:8090"
      command: ['/usr/bin/dumb-init', 'nginx', '-c', '/etc/nginx/nginx.conf']

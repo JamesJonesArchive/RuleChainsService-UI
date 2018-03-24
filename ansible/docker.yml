@@ -1,7 +1,7 @@
 ---
 - name: pull image
   docker_image:
-    name: fedora:27
+    name: fedora:26
     state: present
 #- name: create docker container
 #  docker_container:
