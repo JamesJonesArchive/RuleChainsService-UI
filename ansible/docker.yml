@@ -1,8 +1,8 @@
 ---
-#- name: pull image
-#  docker_image:
-#    name: ubuntu
-#    state: present
+- name: pull image
+  docker_image:
+    name: fedora:27
+    state: present
 #- name: create docker container
 #  docker_container:
 #    name: RuleChains
