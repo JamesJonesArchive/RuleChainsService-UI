@@ -4,7 +4,7 @@
 # using this file. Follow the instructions at http://docs.ansible.com/ansible/galaxy.html
 # to include any roles you want installed prior to running main.yml.
 - src: geerlingguy.repo-epel
-  version: 1.2.1
+  version: 1.2.2
   name: repo-epel
 - src: jdauphant.nginx
   version: v2.6
