@@ -15,8 +15,16 @@ node('master') {
   stage('Publish RuleChainsUI') {
     sh('#!/bin/sh -e\n' + "ansible-playbook -i 'localhost,' -c local --vault-password-file=${env.DEPLOY_KEY} ansible/playbook.yml --extra-vars 'target_hosts=all java_home=${env.JAVA_HOME} deploy_env=${env.DEPLOY_ENV} package_revision=${env.BUILD_NUMBER} workspace=${env.WORKSPACE} bintray_api_key=${env.BINTRAY_API_KEY}' -t publish")
   }
-  stage('Deploy to RuleChainsUI Docker image') {
+  stage('Setup ansible-container') {
     sh('#!/bin/sh -e\n' + "ansible-playbook -i 'localhost,' -c local --vault-password-file=${env.DEPLOY_KEY} ansible/playbook.yml --extra-vars 'target_hosts=all java_home=${env.JAVA_HOME} deploy_env=${env.DEPLOY_ENV} package_revision=${env.BUILD_NUMBER} workspace=${env.WORKSPACE} bintray_api_key=${env.BINTRAY_API_KEY}' -t docker")
+  }
+  stage('Create RuleChainsUI Docker container') {
+    dir('ansible/docker') {
+      sh("""
+        source ../libs/bin/activate
+        ../libs/bin/ansible-container --debug build
+      """)
+    }
   }
   stage('Deploy RuleChainsUI') {
     sshagent (credentials: ['jenkins_ymd_key']) {

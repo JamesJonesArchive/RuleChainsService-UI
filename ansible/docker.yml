@@ -1,8 +1,8 @@
 ---
-- name: pull image
-  docker_image:
-    name: fedora:26
-    state: present
+#- name: pull image
+#  docker_image:
+#    name: fedora:26
+#    state: present
 #- name: create docker container
 #  docker_container:
 #    name: RuleChains
@@ -13,8 +13,8 @@
 #      - 80
 #    ports:
 #      - "80:9080"
-- name: Ensure the fpm gem installed
-  command: gem install fpm
+#- name: Ensure the fpm gem installed
+#  command: gem install fpm
 - name: Install (virtualenv) within a user home directory.
   pip:
     name: virtualenv
@@ -24,10 +24,10 @@
     requirements: requirements.txt
     virtualenv: "{{ playbook_dir }}/libs"
     chdir: ../
-- name: virtualenv activate
-  shell: "source {{ playbook_dir }}/libs/bin/activate"
-- name: build docker
-  shell: "{{ playbook_dir }}/libs/bin/ansible-container --debug build"
-  args:
-    chdir: "{{ playbook_dir }}/docker"
+#- name: virtualenv activate
+#  shell: "source {{ playbook_dir }}/libs/bin/activate"
+#- name: build docker
+#  shell: "{{ playbook_dir }}/libs/bin/ansible-container --debug build"
+#  args:
+#    chdir: "{{ playbook_dir }}/docker"
 
