@@ -61,7 +61,7 @@ services:
       environment:
         - "DEBUG=1"
     roles:
-      - repo-epel
+      # - repo-epel
       - nginx
 registries: {}
   # Add optional registries used for deployment. For example:
