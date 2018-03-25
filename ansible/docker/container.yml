@@ -62,6 +62,35 @@ services:
     dev_overrides:
       environment:
         - "DEBUG=1"
+      roles:
+        - role: sslcerts
+          ssl_certs_generate_dh_param: true
+          ssl_certs_path_owner: "root"
+          ssl_certs_path_group: "root"
+          ssl_certs_common_name: "{{ansible_fqdn}}"
+        - role: nginx
+          nginx_configs:
+            ssl:
+              - ssl_certificate_key {{ssl_certs_privkey_path}}
+              - ssl_certificate     {{ssl_certs_cert_path}}
+              - ssl_dhparam         {{ssl_certs_dhparam_path}}
+          nginx_sites:
+            default:
+              - listen 443 ssl
+              - server_name _
+              - root "/usr/share/nginx/html"
+              - index index.html
+          nginx_http_params:
+            - sendfile "on"
+            - tcp_nopush "on"
+            - tcp_nodelay "on"
+            - keepalive_timeout "65"
+            - access_log "/var/log/nginx/access.log"
+            - error_log "/var/log/nginx/error.log"
+            - server_tokens off
+            - types_hash_max_size 2048
+            - client_max_body_size "3M"
+          nginx_daemon_mode: "off"
 registries: {}
   # Add optional registries used for deployment. For example:
   #  google:

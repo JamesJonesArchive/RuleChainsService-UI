@@ -16,7 +16,7 @@
     metadata_expire: "{{ rulechainsrepo.metadata_expire }}"
 - name: install the latest version of RuleChains
   package:
-    name: RuleChains
+    name: RuleChains-UI
     state: latest
 - name: install the latest updates
   package:
