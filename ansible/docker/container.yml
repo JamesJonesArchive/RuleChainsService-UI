@@ -63,6 +63,8 @@ services:
     roles:
       - role: sslcerts
         ssl_certs_generate_dh_param: true
+        ssl_certs_path_owner: "root"
+        ssl_certs_path_group: "root"
       - role: nginx
         nginx_configs:
           ssl:
