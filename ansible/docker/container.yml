@@ -89,6 +89,9 @@ services:
           - types_hash_max_size 2048
           - client_max_body_size "3M"
         nginx_daemon_mode: "off"
+    tasks:
+      - name: Include Main tasks
+        include_tasks: ./tasks/main.yml
 registries: {}
   # Add optional registries used for deployment. For example:
   #  google:
