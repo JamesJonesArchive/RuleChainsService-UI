@@ -57,7 +57,6 @@ services:
     ports:
       - "8091:443"
     command: ['/usr/bin/dumb-init', 'nginx', '-c', '/etc/nginx/nginx.conf']
-    hostname: {{ container_hostname }}
     dev_overrides:
       environment:
         - "DEBUG=1"
