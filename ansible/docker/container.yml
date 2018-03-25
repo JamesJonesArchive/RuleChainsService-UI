@@ -12,9 +12,10 @@ settings:
 
   # Set the name of the project. Defaults to basename of the project directory.
   # For built services, concatenated with service name to form the built image name.
-  project_name: rulechainsui
+  project_name: rulechains
   vars_files:
     - ./vars/main.yml
+  vault_password_file: "{{ deploy_key }}"    
   # The deployment_output_path is mounted to the Conductor container, and the 
   # `run` and `deployment` commands then write generated Ansible playbooks to it.
   # deployment_output_path: ./ansible-deployment
@@ -53,7 +54,7 @@ services:
   # To use this example, uncomment it and delete the curly braces after services key.
   # You may need to run `docker pull ubuntu:trusty` for this to work.
 
-  rulechains-ui:
+  ui:
     from: "centos:7"
     ports:
       - "8091:443"
@@ -90,9 +91,6 @@ services:
           - types_hash_max_size 2048
           - client_max_body_size "3M"
         nginx_daemon_mode: "off"
-    tasks:
-      - name: Include Main tasks
-        include_tasks: ./tasks/main.yml
 registries: {}
   # Add optional registries used for deployment. For example:
   #  google:
