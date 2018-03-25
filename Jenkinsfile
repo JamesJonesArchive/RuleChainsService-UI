@@ -22,7 +22,7 @@ node('master') {
     dir('ansible/docker') {
       sh("""
         source ../libs/bin/activate
-        ../libs/bin/ansible-container --debug build --roles-path ../roles
+        ../libs/bin/ansible-container --debug build --roles-path=../roles --vault-password-file=${env.DEPLOY_KEY}
       """)
     }
   }
