@@ -16,7 +16,7 @@
       tags:
         - publish
     - name: Deploy RuleChainsUI to Docker
-      include_tasks: docker.yml
+      include_tasks: deploy.yml
       tags:
-        - docker
+        - deploy
         
