@@ -30,4 +30,42 @@
 #  shell: "{{ playbook_dir }}/libs/bin/ansible-container --debug build"
 #  args:
 #    chdir: "{{ playbook_dir }}/docker"
+- name: create package folder
+  file:
+    path: /tmp/debs
+    state: "{{ item }}"
+  with_items:
+    - absent
+    - directory
+  tags:
+    - deploy
+- name: Copy package to remote host
+  copy:
+    src: "{{ item }}"
+    dest: /tmp/debs
+  with_fileglob:
+    - "../rulechains*.deb"
+  tags:
+    - deploy
+- name: Find the rulechains package that was produced
+  find:
+    paths: "/tmp/debs"
+    patterns: "rulechains*.deb"
+  register: iffind
+  tags:
+    - deploy
+- name: Install a rulechains .deb package
+  apt:
+    deb: "{{ item.path }}"
+  with_items: "{{ iffind.files|default([]) }}"
+  register: rc_result
+  tags:
+    - deploy
+- name: install the latest updates
+  package:
+    name: "*"
+    state: latest
+    force_apt_get: True
+  tags:
+    - deploy
 

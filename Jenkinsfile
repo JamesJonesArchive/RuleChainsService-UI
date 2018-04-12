@@ -10,6 +10,7 @@ node('master') {
   }
   stage('Build RuleChainsUI') {
     sh "rm -f *.rpm"
+    sh "rm -f *.deb"
     sh "ansible-playbook -i 'localhost,' -c local --vault-password-file=${env.DEPLOY_KEY} ansible/playbook.yml --extra-vars 'target_hosts=all java_home=${env.JAVA_HOME} deploy_env=${env.DEPLOY_ENV} package_revision=${env.BUILD_NUMBER}' -t build"
   }
   stage('Publish RuleChainsUI') {
