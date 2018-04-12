@@ -12,7 +12,7 @@
         - build
     - name: Publish RuleChainsUI
       include_tasks: publish.yml
-      when: "deploy_env == 'Development'"
+      when: "deploy_env == 'Production'"
       tags:
         - publish
     - name: Deploy RuleChainsUI to Docker
