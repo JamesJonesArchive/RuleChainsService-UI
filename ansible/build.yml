@@ -1,6 +1,8 @@
 ---
 - name: Ensure the fpm gem installed
   command: gem install fpm
+  tags:
+    - build
 - name: remove node_modules and dist folders
   file:
     path: "{{ item }}"
@@ -8,6 +10,8 @@
   with_items:
     - ../node_modules
     - ../dist
+  tags:
+    - build
 - name: Build RuleChainsUI
   shell: "{{ item }}"
   with_items:
@@ -15,12 +19,18 @@
     - "node_modules/@angular/cli/bin/ng build --prod --build-optimizer"
   args:
       chdir: "../"
+  tags:
+    - build
 - name: Build RuleChainsUI RPM
   shell: "fpm -s dir -t rpm -n {{ app_name | quote }} -v {{ package_settings.version | quote }} --iteration {{ package_revision | quote }} --description {{ ('YMD RuleChains-UI - ' ~ package_settings.description) | quote }} --vendor {{ 'YMD Partners' | quote }} -d {{ 'nginx' | quote }} -d {{ 'nodejs' | quote }} dist/.=/usr/local/lib/rulechains/ui"
   args:
       chdir: "../"
+  tags:
+    - build
 - name: Build RuleChainsUI DEB
   shell: "fpm -s dir -t deb -n {{ app_name | quote }} -v {{ package_settings.version | quote }} --iteration {{ package_revision | quote }} --description {{ ('YMD RuleChains-UI - ' ~ package_settings.description) | quote }} --vendor {{ 'YMD Partners' | quote }} -d {{ 'nginx' | quote }} -d {{ 'nodejs' | quote }} dist/.=/usr/local/lib/rulechains/ui"
   args:
       chdir: "../"
+  tags:
+    - build
 
